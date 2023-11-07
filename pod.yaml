@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-hello-world-spring-boot
+spec:
+  selector:
+    matchLabels:
+      app: docker-hello-world-spring-boot
+  replicas: 1 # tells deployment to run 1 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: docker-hello-world-spring-boot
+    spec:
+      containers:
+      - name: docker-hello-world-spring-boot
+
+        image: 246517980510.dkr.ecr.ap-southeast-1.amazonaws.com/docker-hello-world-spring-boot:latest
+
+        ports:
+        - containerPort: 8080
+
+      nodeSelector:
+        eks.amazonaws.com/nodegroup: mng-eks-bva-2
